@@ -16,7 +16,9 @@ end
   post.tags = Tag.all.sample(rand)
   rand = Random.rand(1..5)
   post.synalios = Synalio.all.sample(rand)
-  game_systems = GameSystem.all.sample
-  post.game_systems = game_systems
-  psot.save!
+  max = GameSystem.count
+  rand = Random.rand(1..max)
+  game_system = GameSystem.find_by(id: rand)
+  PostGameSystem.find_or_create_by!(post: post, game_system_id: game_system.id)
+  post.save!
 end
